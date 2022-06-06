@@ -1,0 +1,39 @@
+version: "3.9"
+services:
+  mongodb:
+    container_name: egonon-mongodb
+    image: mongo:5.0.8
+    networks:
+      - egonon-network
+    ports:
+      - "27017:27017"
+    expose:
+      - "27017"
+    volumes:
+      - ~/egononmount/conf/mongodb/init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js:ro
+      - ~/egononmount/data/mongodb/:/data/db
+    environment:
+      - MONGO_INITDB_DATABASE=EgoNon
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=EgoNonLiege2022!
+  front:
+    container_name: egonon-front
+    image: egononwebserver:0.1
+    networks:
+      - egonon-network
+    ports:
+      - "80:80"
+    volumes:
+      - ~/egononmount/conf/nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+  app:
+    container_name: egonon-app
+    image: egonon-back:0.1.0-SNAPSHOT
+    networks:
+      - egonon-network
+    ports:
+      - "9000:9000"
+    environment:
+      - MONGO_URI=mongodb://egonon:egonon2022!@egonon-mongodb:27017/EgoNon
+networks:
+  egonon-network:
+    driver: bridge
