@@ -1,0 +1,6 @@
+{
+	"port": 8080,
+	"address": "",
+	"baseurl": "/filebrowser",
+	"database": "~/egononmount/conf/filebrowser/filebrowser.db"
+}
