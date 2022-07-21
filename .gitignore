@@ -1,0 +1,11 @@
+*.log
+*.jar
+*.im;
+target/
+.scannerwork
+.vscode/
+.idea/
+.bsp
+.DS_Store
+data/
+personal.conf
