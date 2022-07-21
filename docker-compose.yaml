@@ -28,14 +28,14 @@ services:
       - "443:443"
     volumes:
       - ~/egononmount/conf/nginx/nginx.conf:/etc/nginx/conf.d/default.conf
-      - ~/egononmount/conf/certbot/conf/:/etc/nginx/ssl/:ro
-      - ~/egononmount/conf/certbot/www:/var/www/certbot/:ro
+      - ~/egononmount/conf/certbot/conf/:/etc/letsencrypt
+      - ~/egononmount/conf/certbot/www:/var/www/certbot
   certbot:
     container_name: egonon-certbot
     image: certbot/certbot:latest
     volumes:
-      - ~/egononmount/conf/certbot/conf/:/etc/letsencrypt/:rw
-      - ~/egononmount/conf/certbot/www:/var/www/certbot/:rw
+      - ~/egononmount/conf/certbot/conf/:/etc/letsencrypt
+      - ~/egononmount/conf/certbot/www:/var/www/certbot
   app:
     container_name: egonon-app
     image: egonon-back:2.0.1
